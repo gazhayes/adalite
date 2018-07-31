@@ -1,3 +1,4 @@
+require('isomorphic-fetch')
 const net = require('net')
 
 const cmdtable =
@@ -137,6 +138,12 @@ module.exports = function(app, env) {
 
     client.on('error', (err) => {
       return res.status(500).send(`error: ${err}`)
+    })
+  })
+
+  app.get('/api/transactions/status/:txHash', async (req, res) => {
+    return res.status(200).send({
+      status: process.env.CARDANOLITE_MOCK_TX_SUMMARY_SUCCESS === 'true' ? 'success' : 'unknown',
     })
   })
 }

@@ -1,7 +1,7 @@
 const sleep = require('./helpers/sleep')
 
 module.exports = function(app, env) {
-  app.post('/api/transactions', async (req, res) => {
+  app.post('/api/transactions/submit', async (req, res) => {
     let txHash
     let txBody // [1, txBody] in CBOR
     try {
@@ -23,5 +23,13 @@ module.exports = function(app, env) {
         error: success ? undefined : 'TransactionRejectedByNetwork',
       })
     )
+  })
+
+  app.get('/api/transactions/status/:txHash', async (req, res) => {
+    await sleep(1000)
+
+    return res.status(200).send({
+      status: process.env.CARDANOLITE_MOCK_TX_SUMMARY_SUCCESS === 'true' ? 'success' : 'unknown',
+    })
   })
 }
