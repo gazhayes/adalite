@@ -151,7 +151,7 @@ class LoadKeyFileClass extends Component {
                   type: 'file',
                   id: 'loadFile',
                   accept: 'application/json,.json',
-                  multiple: true,
+                  multiple: false,
                   onChange: this.selectFile,
                 }),
                 h(
