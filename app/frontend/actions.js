@@ -459,7 +459,7 @@ module.exports = ({setState, getState}) => {
         )
     )
 
-    const blob = new Blob([walletExport], {type: 'application/json;charset=utf-8'})
+    const blob = new Blob([walletExport], {type: 'application/octet-stream;charset=utf-8'})
     FileSaver.saveAs(blob, `${walletName}.json`)
 
     setState({
